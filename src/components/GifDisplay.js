@@ -11,11 +11,11 @@ const GifDisplay = ({url, title, gif_id, addFavorite, removeFavorite, isFavorite
                 {title}
             </h4>
             <img src={url} alt={title} title={title} />
-            {!isFavorite && <Button onclick={() => addFavorite(gif_id)}>
+            {!isFavorite && <Button onClick={() => addFavorite(gif_id)}>
                 Add Favorite
             </Button>}
             {isFavorite &&
-            <Button onclick={() => removeFavorite(gif_id)}>
+            <Button onClick={() => removeFavorite(gif_id)}>
                 Remove Favorite
             </Button>}
         </div>

@@ -10,7 +10,7 @@ const SearchPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [url, setUrl] = useState();
     const [rating, setRating] = useState('g');
-    const {favorites, addFavorites, removeFavorites} = useFavoritesContext();
+    const {favorites, addFavorite, removeFavorite} = useFavoritesContext();
     const {isLoading, error, isSuccess, data: searchResults } = useQuery(["Gifs", url], () => Gifs(url), {
         enabled: !!url,
      
@@ -18,10 +18,10 @@ const SearchPage = () => {
        
     });
         
-        
+    
       return (
         <div>
-          <h1>Search</h1>
+          <h1>Search Page</h1>
           <form>
             <input
               placeholder='Search for a gif'
@@ -49,7 +49,7 @@ const SearchPage = () => {
             >
             Search
             </Button>
-          </form>
+            </form>
           {isLoading && <p>Loading...</p>}
           {error && <p>An error has occurred: {error.message}</p>}
           {isSuccess && 
@@ -59,9 +59,9 @@ const SearchPage = () => {
               url={val.url}
               title={val.title}
               gif_id={val.gif_id}
-              addFavorites={addFavorites}
-              removeFavorites={removeFavorites}
-              isFavorites={favorites.some((fav) => fav.gif_id === val.gif_id)}
+              addFavorite={() => addFavorite({ gif_id: val.gif_id, url: val.url, title: val.title })}
+              removeFavorite={removeFavorite}
+              isFavorite={favorites.some((fav) => fav.gif_id === val.gif_id)}
               />
           ))}
 

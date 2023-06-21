@@ -21,7 +21,18 @@ export function FavoritesProvider  (props)  {
     const addFavorite = useCallback(
         (gif) => {
              dispatch({ type: ADD_FAVORITE, payload: gif })
-        },
+
+             fetch('http://localhost:3006/favorites', {
+                 method: 'POST',
+                 headers: {
+                     'Content-Type': 'application/json'
+                 },
+                    body: JSON.stringify(gif)
+                })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .then(error => console.log(error));
+                },
         [dispatch]
     );
 
